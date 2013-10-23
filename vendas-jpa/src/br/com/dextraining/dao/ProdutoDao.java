@@ -76,4 +76,5 @@ public class ProdutoDao extends GenericDao<Produto> {
 //		produto.baixaEstoque(value);		
 //		getEm().merge(produto);
 //	}
+	
 }
