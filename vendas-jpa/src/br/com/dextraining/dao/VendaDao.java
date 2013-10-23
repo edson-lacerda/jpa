@@ -32,7 +32,8 @@ public class VendaDao extends GenericDao<Venda> {
 
 		for (ItemVenda item : venda.getItens()) {
 			try {
-				produtoDao.atualizaQuantidade(item.getProduto(), item.getQntd());
+				//produtoDao.atualizaQuantidade(item.getProduto(), item.getQntd());
+				produtoDao.atualizaQuantidade(item.getProduto().getId(), item.getQntd());
 			} catch (QuantidadeDeProdutosIndisponiveis e) {
 				throw new RuntimeException(e);
 			}

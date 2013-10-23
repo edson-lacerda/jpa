@@ -7,9 +7,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 
 import br.com.dextraining.dao.QuantidadeDeProdutosIndisponiveis;
+
+@NamedQuery(name="atualizaQuantidade",query="update Produto p set p.qntd = :pqntd where p.id = :pid")
 
 @Entity
 public class Produto extends AbstractEntity {
@@ -76,12 +79,13 @@ public class Produto extends AbstractEntity {
 		getCategorias().remove(categoria);
 	}
 
-	@Transient
-	public void baixaEstoque(Integer qntd) throws QuantidadeDeProdutosIndisponiveis {
-		this.qntd -= qntd;
-		if (this.qntd < 0) {
-			throw new QuantidadeDeProdutosIndisponiveis("teste");
-		}
-		
-	}
+//	@Transient
+//	public void baixaEstoque(Integer qntd) throws QuantidadeDeProdutosIndisponiveis {
+//		this.qntd -= qntd;
+//		if (this.qntd < 0) {
+//			throw new QuantidadeDeProdutosIndisponiveis("teste");
+//		}
+//		
+//	}
+	
 }

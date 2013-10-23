@@ -56,20 +56,24 @@ public class ProdutoDao extends GenericDao<Produto> {
 		}
 	}
 
-	@Deprecated
-	public void atualizaQuantidade(Long id, Integer value) {
-	    //String jpql = "update " + Produto.class.getSimpleName() + " p set p.qntd = p.qntd - :qntd where p.id = :id";
-	    Query qry = getEm().createNativeQuery("update Produto p set p.qntd = p.qntd - :qntd where p.id = :id");
-	    qry.setParameter("qntd", value);
-	    qry.setParameter("id", id);
-	    int result = qry.executeUpdate();
-	    if (result != 1) {
-	        throw new RuntimeException("erro ao atualizar produto");
-	    }
+	//@Deprecated
+	public void atualizaQuantidade(Long id, Integer value) throws QuantidadeDeProdutosIndisponiveis {
+//	    Query qry = getEm().createNativeQuery("update Produto p set p.qntd = p.qntd - :qntd where p.id = :id");
+//	    qry.setParameter("qntd", value);
+//	    qry.setParameter("id", id);
+//	    int result = qry.executeUpdate();
+//	    if (result != 1) {
+//	        throw new RuntimeException("erro ao atualizar produto");
+//	    }
+		
+		Query qry = getEm().createNamedQuery("atualizarQuantidade");
+ 	    qry.setParameter("pqntd", value);
+	    qry.setParameter("pid", id);
+		qry.getResultList();
 	}
 
-	public void atualizaQuantidade(Produto produto, Integer value) throws QuantidadeDeProdutosIndisponiveis {
-		produto.baixaEstoque(value);		
-		getEm().merge(produto);
-	}
+//	public void atualizaQuantidade(Produto produto, Integer value) throws QuantidadeDeProdutosIndisponiveis {
+//		produto.baixaEstoque(value);		
+//		getEm().merge(produto);
+//	}
 }
